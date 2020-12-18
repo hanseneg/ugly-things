@@ -3,26 +3,28 @@ const {Provider, Consumer} = React.createContext()
 
 class ContextProvider extends React.Component {
     state = {
-        theme: 'dark'
+        title: '',
+        imageURLs: [],
+        description: ''
     }
 
     toggleTheme = () => {
         this.setState(prevState => {
             return {
-                theme: prevState.theme === 'light' ? 'dark' : 'light'
+                title: '',
+                imageURLs: [],
+                description: ''
             }
         })
     }
 
     render() {
         return (
-            <Provider value={{theme: this.state.theme, toggleTheme: this.toggleTheme}}>
+            <Provider value={'title'}>
                 {this.props.children}
             </Provider>
         )
     }
 }
-
-
 
 export {ContextProvider, Consumer as ContextConsumer}
