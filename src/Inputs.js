@@ -5,17 +5,30 @@ class Inputs extends React.Component {
     render() {
         return(
             <ContextConsumer>
-                {() => (
+                {({title, imageURL, description, handleChange}) => (
                     <form>
                     <input
                         placeholder='Title'
-                    ></input>
+                        type='text'
+                        name='title'
+                        value={title}
+                        onChange={handleChange}
+                    />
                     <input
                         placeholder='Image URL'
-                    ></input>
+                        type='text'
+                        name='imageURL'
+                        value={imageURL}
+                        onChange={handleChange}
+                    />
                     <input
                         placeholder='Description'
-                    ></input>
+                        type='text'
+                        name='description'
+                        value={description}
+                        onChange={handleChange}
+                    />
+                    <button onClick=''>Submit Ugly Thing</button>
                 </form>
                 )}
             </ContextConsumer>

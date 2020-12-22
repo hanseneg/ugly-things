@@ -4,18 +4,12 @@ const {Provider, Consumer} = React.createContext()
 class ContextProvider extends React.Component {
     state = {
         title: '',
-        imageURLs: [],
+        imageURL: [],
         description: ''
     }
 
-    toggleTheme = () => {
-        this.setState(prevState => {
-            return {
-                title: '',
-                imageURLs: [],
-                description: ''
-            }
-        })
+    createList = (title, imageURL, description) => {
+        this.setState({title, imageURL, description})
     }
 
     render() {
