@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-const {Provider, Consumer} = React.createContext()
+const { Provider, Consumer } = React.createContext()
 
 class ContextProvider extends React.Component {
     state = {
@@ -11,19 +11,14 @@ class ContextProvider extends React.Component {
     }
 
     handleChange = (e) => {
-        const {name, value} = e.target
-        this.setState({[name]: value})
+        const { name, value } = e.target
+        this.setState({
+            [name]: value
+        })
     }
 
     componentDidMount() {
-        axios.get(`https://api.vschool.io/ethanhansen/thing`)
-          .then(response => {
-            console.log(`get request Array.isArray(response.data): ${Array.isArray(response.data)} | response.data.title: ${response.data.title} | response.data[0].title: ${response.data[0].title} `)
-            const title = response.data.title
-            const imgUrl = response.data.imgUrl
-            const description = response.data.description
-            this.setState({ title, imgUrl, description })
-          })
+        this.getThings()
     }
 
     handleSubmit = (e) => {
@@ -32,34 +27,48 @@ class ContextProvider extends React.Component {
             title: this.state.title,
             imgUrl: this.state.imgUrl,
             description: this.state.description
+        }
+
+        axios.post(`https://api.vschool.io/ethanhansen/thing`, user)
+            .then(response => {
+                console.log(response)
+                console.log(response.data)
+                this.getThings()
+            })
     }
 
-    axios.post(`https://api.vschool.io/ethanhansen/thing`, user)
-        .then(response => {
-        console.log(response);
-        console.log(response.data);
+    getThings = () => {
+        axios.get(`https://api.vschool.io/ethanhansen/thing`)
+            .then(response => {
+                console.log(response.data) 
+                this.setState({ thingsList: response.data })
+                console.log(this.state.thingsList)
+            })
+    }
+
+    deleteButton = (id) => {
+        axios.delete(`https://api.vschool.io/ethanhansen/thing/${id}`)
+            .then(() => {
+                this.getThings()
         })
     }
     
-
-    //create a list and render that to the dom and push new ugly things to that using axios.post
     //edit individual items using axios.put
-    //delete items using axios.delete
-
+    
     render() {
-        return (
-            <Provider 
-                value={{title: this.state.title,
-                imgUrl: this.state.imgUrl,
-                description: this.state.description,
-                handleChange: this.handleChange,
-                handleSubmit: this.handleSubmit,
-                thingsList: this.thingsList
-            }}>
-                {this.props.children}
-            </Provider>
+        return ( <Provider value = {
+                {
+                    title: this.state.title,
+                    imgUrl: this.state.imgUrl,
+                    description: this.state.description,
+                    handleChange: this.handleChange,
+                    handleSubmit: this.handleSubmit,
+                    thingsList: this.state.thingsList,
+                    deleteButton: this.deleteButton
+                }
+            } > { this.props.children } </Provider>
         )
     }
 }
 
-export {ContextProvider, Consumer as ContextConsumer}
+export { ContextProvider, Consumer as ContextConsumer }

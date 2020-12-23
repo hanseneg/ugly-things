@@ -1,13 +1,14 @@
 import React from 'react'
 import {ContextConsumer} from './context'
+import Thing from './Thing'
 
 class List extends React.Component {
     render() {
         return(
             <ContextConsumer>
-                {({thingsList}) =>(
+                {({thingsList, deleteButton}) =>(
                     <div>
-                        {thingsList}
+                        {thingsList.map((thing) => <Thing imgUrl={thing.imgUrl} title={thing.title} description={thing.description} key={thing._id} deleteButton={deleteButton} id={thing._id}/>)}
                     </div>
                 )}
             </ContextConsumer>
