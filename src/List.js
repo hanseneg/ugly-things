@@ -5,9 +5,9 @@ class List extends React.Component {
     render() {
         return(
             <ContextConsumer>
-                {() =>(
+                {({thingsList}) =>(
                     <div>
-                        display list of ugly things
+                        {thingsList}
                     </div>
                 )}
             </ContextConsumer>

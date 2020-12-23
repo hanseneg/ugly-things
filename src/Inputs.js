@@ -5,7 +5,7 @@ class Inputs extends React.Component {
     render() {
         return(
             <ContextConsumer>
-                {({title, imageUrl, description, handleChange, handleSubmit}) => (
+                {({title, imgUrl, description, handleChange, handleSubmit}) => (
                     <form>
                         <input
                             placeholder='Title'
@@ -17,8 +17,8 @@ class Inputs extends React.Component {
                         <input
                             placeholder='Image URL'
                             type='text'
-                            name='imageURL'
-                            value={imageUrl}
+                            name='imgUrl'
+                            value={imgUrl}
                             onChange={handleChange}
                         />
                         <input
@@ -28,7 +28,7 @@ class Inputs extends React.Component {
                             value={description}
                             onChange={handleChange}
                         />
-                        <button onClick={() => handleSubmit(title, imageUrl, description)}>Submit Ugly Thing</button>
+                        <button onClick={handleSubmit}>Submit Ugly Thing</button>
                     </form>
                 )}
             </ContextConsumer>
