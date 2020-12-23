@@ -7,7 +7,7 @@ class List extends React.Component {
             <ContextConsumer>
                 {() =>(
                     <div>
-                        
+                        display list of ugly things
                     </div>
                 )}
             </ContextConsumer>

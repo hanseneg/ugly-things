@@ -5,7 +5,7 @@ const {Provider, Consumer} = React.createContext()
 class ContextProvider extends React.Component {
     state = {
         title: '',
-        imageUrl: [],
+        imageUrl: '',
         description: ''
     }
 
@@ -22,11 +22,22 @@ class ContextProvider extends React.Component {
             const description = response.data.description
             this.setState({ title, imageUrl, description })
           })
-      }
-
-    createList = (title, imageUrl, description) => {
-        this.setState({title, imageUrl, description})
     }
+
+    handleSubmit = () => {
+    const user = {
+        title: this.state.title,
+        imageUrl: this.state.imageUrl,
+        description: this.state.description
+    }
+
+    axios.post(`https://api.vschool.io/ethanhansen/thing`, { user })
+        .then(response => {
+        console.log(response);
+        console.log(response.data);
+        })
+    }
+    
 
     //create a memelist and render that to the dom and push new ugly things to that using axios.post
     //edit individual items using axios.put
@@ -34,7 +45,7 @@ class ContextProvider extends React.Component {
 
     render() {
         return (
-            <Provider value={'title'}>
+            <Provider value={{title: this.state.title, imageUrl: this.state.imageUrl, description: this.state.description, handleChange: this.handleChange, handleSubmit: this.handleSubmit}}>
                 {this.props.children}
             </Provider>
         )
