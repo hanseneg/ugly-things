@@ -58,12 +58,9 @@ class ContextProvider extends React.Component {
     render() {
         return ( <Provider value = {
                 {
-                    title: this.state.title,
-                    imgUrl: this.state.imgUrl,
-                    description: this.state.description,
+                    ...this.state,
                     handleChange: this.handleChange,
                     handleSubmit: this.handleSubmit,
-                    thingsList: this.state.thingsList,
                     deleteButton: this.deleteButton
                 }
             } > { this.props.children } </Provider>

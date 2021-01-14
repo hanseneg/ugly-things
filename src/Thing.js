@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Thing(props) {
+function Thing({title, imgUrl, description, deleteButton, id}) {
     return(
         <div>
-            <header>{props.title}</header>
-            <img src={props.imgUrl} alt=''/>
-            <p>{props.description}</p>
-            <button onClick={() => props.deleteButton(props.id)}>Delete</button>
+            <header>{title}</header>
+            <img src={imgUrl} alt=''/>
+            <p>{description}</p>
+            <button onClick={() => deleteButton(id)}>Delete</button>
         </div>
     )
 }
